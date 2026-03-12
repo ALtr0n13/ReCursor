@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReCursor</title>
+
+  <!-- Telegram Mini App SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="phone">
+
+    <!-- Sticky header (appears on scroll) -->
+    <header class="sticky-header" id="stickyHeader">
+      <span class="sticky-logo">ReCursor</span>
+      <a href="about.html" class="sticky-about">[A]</a>
+    </header>
+
+    <!-- Intro -->
+    <div class="intro">
+      <h1>ReCursor</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+
+    <!-- Essay list -->
+    <div class="essay-list">
+
+      <a href="essay-1.html" class="essay-card">
+        <img loading="lazy" class="thumb" src="assets/images/essay-1-1.webp" alt="Essay 1" />
+        <h4>Returning to 'Wigs &amp; Gloves': Recounting my artistic interest in burlesque and drag</h4>
+        <span class="author">Julia Gaes</span>
+        <div class="meta">
+          <span>28 Nov. 2024</span>
+          <span>9 min.</span>
+        </div>
+      </a>
+
+      <a href="essay-2.html" class="essay-card">
+        <img loading="lazy" class="thumb" src="assets/images/essay-2-1.webp" alt="Essay 2" />
+        <h4>Essay Title Two Goes Here and Can Wrap to Two Lines</h4>
+        <span class="author">Julia Gaes</span>
+        <div class="meta">
+          <span>14 Oct. 2024</span>
+          <span>6 min.</span>
+        </div>
+      </a>
+
+      <a href="essay-3.html" class="essay-card">
+        <img loading="lazy" class="thumb" src="assets/images/essay-3-1.webp" alt="Essay 3" />
+        <h4>Essay Title Three — Another Compelling Headline</h4>
+        <span class="author">Julia Gaes</span>
+        <div class="meta">
+          <span>02 Sep. 2024</span>
+          <span>11 min.</span>
+        </div>
+      </a>
+
+      <a href="essay-4.html" class="essay-card">
+        <img loading="lazy" class="thumb" src="assets/images/essay-4-1.webp" alt="Essay 4" />
+        <h4>Essay Title Four — Short and Sharp</h4>
+        <span class="author">Julia Gaes</span>
+        <div class="meta">
+          <span>18 Aug. 2024</span>
+          <span>5 min.</span>
+        </div>
+      </a>
+
+      <a href="essay-5.html" class="essay-card">
+        <img loading="lazy" class="thumb" src="assets/images/essay-5-1.webp" alt="Essay 5" />
+        <h4>Essay Title Five — The Final One in This List</h4>
+        <span class="author">Julia Gaes</span>
+        <div class="meta">
+          <span>01 Jul. 2024</span>
+          <span>8 min.</span>
+        </div>
+      </a>
+
+    </div><!-- /essay-list -->
+
+  </div><!-- /phone -->
+
+  <!-- Shared JS -->
+  <script src="js/main.js"></script>
+
+  <!-- Page-specific JS -->
+  <script>
+    // Telegram: expand to fullscreen on load
+    if (window.Telegram?.WebApp) {
+      Telegram.WebApp.ready();
+      Telegram.WebApp.expand();
+    }
+
+    // Sticky header — show after scrolling past intro
+    const stickyHeader = document.getElementById('stickyHeader');
+    const intro = document.querySelector('.intro');
+
+    function checkScroll() {
+      const scrollY = document.documentElement.scrollTop || document.body.scrollTop;
+      if (scrollY > intro.offsetHeight) {
+        stickyHeader.classList.add('visible');
+      } else {
+        stickyHeader.classList.remove('visible');
+      }
+    }
+
+    document.addEventListener('scroll', checkScroll, { passive: true });
+  </script>
+
+</body>
+</html>

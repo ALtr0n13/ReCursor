@@ -1,0 +1,748 @@
+/* =============================================
+   RECURSOR — style.css
+   Based on Figma design
+   ============================================= */
+
+/* --- Google Fonts fallback for Futura --- */
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap');
+
+/* --- CSS Variables --- */
+:root {
+  --bg: #F4EAE6;
+  --white: #FFFFFF;
+  --navy: #00008C;
+  --blue: #3A4FAB;
+  --font: 'Futura', 'Jost', sans-serif;
+}
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background: var(--bg);
+  font-family: var(--font);
+  font-size: 16px;
+  color: var(--navy);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Phone Container --- */
+.phone {
+  max-width: 390px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: var(--bg);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* =============================================
+   TYPOGRAPHY
+   ============================================= */
+
+/* h2 — Page title (e.g. "ReCursor") */
+h1, .h1 {
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  color: var(--navy);
+}
+
+/* h4 — Essay title */
+h4, .h4 {
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.015em;
+  color: var(--navy);
+}
+
+/* body/regular */
+p, .body-regular {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--navy);
+}
+
+/* body/caption — author, date, read time */
+.caption {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--blue);
+}
+
+/* =============================================
+   STICKY HEADER (appears on scroll)
+   ============================================= */
+
+.sticky-header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: 100%;
+  max-width: 390px;
+  height: 48px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--navy);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.sticky-header.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sticky-logo {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: var(--navy);
+}
+
+.sticky-about {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+  color: var(--navy);
+  text-decoration: none;
+  width: 16px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+
+/* =============================================
+   INTRO SECTION (top of home page)
+   ============================================= */
+
+.intro {
+  padding: 40px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* =============================================
+   ESSAY LIST
+   ============================================= */
+
+.essay-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Single essay card */
+.essay-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px 24px;
+  gap: 8px;
+  width: 100%;
+  border-bottom: 1px solid var(--blue);
+  text-decoration: none;
+  background: var(--bg);
+}
+
+
+
+/* Essay thumbnail image */
+.essay-card .thumb {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  background: #c9c0d3;
+}
+
+/* Essay title */
+.essay-card h4 {
+  margin-top: 4px;
+}
+
+/* Author name */
+.essay-card .author {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--blue);
+}
+
+/* Date + read time row */
+.essay-card .meta {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.essay-card .meta span {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--blue);
+}
+
+
+
+
+
+/* =============================================
+   INDIVIDUAL ESSAY PAGE
+   ============================================= */
+
+/* Sticky header on essay page — back arrow + title + [A] */
+.essay-header-bar {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: 100%;
+  max-width: 390px;
+  height: 48px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--navy);
+  gap: 8px;
+}
+
+.essay-header-bar .back-btn {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--navy);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.essay-header-bar .bar-title {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--navy);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+.essay-header-bar .bar-about {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--navy);
+  text-decoration: none;
+  flex-shrink: 0;
+  width: 16px;
+  text-align: center;
+}
+
+/* Essay page content */
+.essay-page {
+  padding: 64px 24px 60px;
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+/* Essay title — 32px bold */
+.essay-page .essay-title {
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+
+/* Author */
+.essay-page .essay-author {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--blue);
+  margin-bottom: 4px;
+}
+
+/* Date + read time row */
+.essay-page .essay-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.essay-page .essay-meta span {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--blue);
+}
+
+/* Full width image */
+.essay-page .essay-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Image caption */
+.essay-page .essay-caption {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--blue);
+  margin-bottom: 32px;
+}
+
+/* Body text */
+.essay-page .essay-body {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  color: var(--navy);
+}
+
+.essay-page .essay-body p + p {
+  margin-top: 20px;
+}
+
+/* Drop cap — large first letter */
+.essay-page .essay-body p:first-child::first-letter {
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 0.8;
+  float: left;
+  margin-right: 6px;
+  margin-top: 8px;
+  color: var(--navy);
+}
+
+/* =============================================
+   TEXT SELECTION BAR
+   ============================================= */
+
+.selection-bar {
+  display: none;
+  position: fixed;
+  z-index: 400;
+  background: var(--navy);
+  border-radius: 4px;
+  padding: 8px 16px;
+  gap: 0;
+  align-items: center;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.selection-bar.active {
+  display: flex;
+}
+
+.selection-bar button {
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+.selection-bar .sel-divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(255,255,255,0.3);
+}
+
+/* =============================================
+   COMMENT BOTTOM SHEET
+   ============================================= */
+
+.comment-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 400;
+}
+
+.comment-overlay.active {
+  display: block;
+}
+
+.comment-sheet {
+  position: fixed;
+  bottom: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 390px;
+  background: var(--navy);
+  z-index: 401;
+  padding: 24px 20px 40px;
+  transition: bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.comment-sheet.active {
+  bottom: 0;
+}
+
+.comment-sheet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.comment-sheet-header span {
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 16px;
+  color: #FFFFFF;
+}
+
+.comment-sheet-header button {
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.comment-quote {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+.comment-field label {
+  display: block;
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 6px;
+}
+
+.comment-field textarea,
+.comment-field input[type="text"] {
+  width: 100%;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 14px;
+  color: #FFFFFF;
+  resize: none;
+  outline: none;
+  margin-bottom: 16px;
+}
+
+.comment-field textarea {
+  height: 80px;
+}
+
+.comment-field textarea::placeholder,
+.comment-field input::placeholder {
+  color: rgba(255,255,255,0.3);
+}
+
+.comment-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.comment-consent input[type="checkbox"] {
+  margin-top: 2px;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  accent-color: #FFFFFF;
+}
+
+.comment-consent span {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: rgba(255,255,255,0.7);
+}
+
+.comment-submit {
+  width: 100%;
+  background: #FFFFFF;
+  color: var(--navy);
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 16px;
+  padding: 14px;
+  border: none;
+  cursor: pointer;
+}
+
+
+
+.gallery-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #080817;
+  z-index: 300;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.gallery-overlay.active {
+  display: flex;
+}
+
+/* Swipe container */
+.gallery-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Each slide */
+.gallery-slide {
+  min-width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 60px 0 100px;
+}
+
+.gallery-slide img {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: contain;
+  display: block;
+}
+
+/* Caption overlay at bottom of image */
+.gallery-caption {
+  position: absolute;
+  bottom: 100px;
+  left: 0;
+  right: 0;
+  padding: 16px 20px;
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #F4E9E6;
+}
+
+/* Bottom bar — dots + close */
+.gallery-bar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 390px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 301;
+}
+
+/* Dot indicators */
+.gallery-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.gallery-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid #F4E9E6;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+
+.gallery-dot.active {
+  background: #F4E9E6;
+}
+
+/* Close button */
+.gallery-close {
+  font-family: var(--font);
+  font-size: 18px;
+  color: #F4E9E6;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  line-height: 1;
+}
+
+
+
+/* Footnote reference in text */
+.fn {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  vertical-align: super;
+  line-height: 0;
+}
+
+/* Dark overlay behind sheet */
+.fn-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+}
+
+.fn-overlay.active {
+  display: block;
+}
+
+/* Bottom sheet */
+.fn-sheet {
+  position: fixed;
+  bottom: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 390px;
+  background: #0D1117;
+  color: #FFFFFF;
+  padding: 24px 20px;
+  z-index: 201;
+  transition: bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 0;
+}
+
+.fn-sheet.active {
+  bottom: 0;
+}
+
+.fn-sheet .fn-number {
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  color: #FFFFFF;
+  margin-bottom: 12px;
+}
+
+.fn-sheet .fn-text {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #FFFFFF;
+}
+
+.about-page {
+  padding: 64px 24px 60px;
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+.about-title {
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+  margin-bottom: 24px;
+}
+
+.about-body p {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+  color: var(--navy);
+  margin-bottom: 24px;
+}
+
+/* =============================================
+   UTILITY
+   ============================================= */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}

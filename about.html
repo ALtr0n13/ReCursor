@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — ReCursor</title>
+
+  <!-- Telegram Mini App SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="phone">
+
+    <!-- Fixed header bar: back + "About" -->
+    <header class="essay-header-bar">
+      <a href="index.html" class="back-btn">&#8592;</a>
+      <span class="bar-title">About</span>
+      <div style="width:16px;"></div>
+    </header>
+
+    <!-- About content -->
+    <article class="about-page">
+
+      <h1 class="about-title">About ReCursor</h1>
+
+      <div class="about-body">
+        <p>Photographs have traditionally been relied upon to record the world. They were produced to be the keepers of happy memories, the sources for news, a way to see with your own eyes that what was said or written was true. Witnessing, proving, illustrating, capturing elements of and events in the world out there are all still things photographs can do. But in the last couple of decades, through digital circulation, they arguably increasingly create our world.</p>
+
+        <p>Photographs serve as vernacular languages on the internet, with the visual literacy of print becoming replaced by a new visual fluency as the distinction between makers and viewers was eroded. By sharing images across digital networks, we all participate in transforming what photographs can do. More explicitly and fluently than before, still images function as dynamic vessels of meaning, existing enmeshed within planetary-scale databases and travelling endlessly throughout communications networks. An image made on a mobile phone in Chicago, say, and shared to a social media feed might strike a chord for a German viewer who, by reposting it, propels it onward to reemerge as a meme in a Japanese pop culture page, or in a dataset used to train facial recognition systems in San Francisco, or transforming an interior designer's moodboard in Sao Paolo.</p>
+      </div>
+
+    </article>
+
+  </div><!-- /phone -->
+
+  <script src="js/main.js"></script>
+  <script>
+    if (window.Telegram?.WebApp) {
+      Telegram.WebApp.ready();
+      Telegram.WebApp.expand();
+    }
+  </script>
+
+</body>
+</html>

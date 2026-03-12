@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trauma in the Frame — ReCursor</title>
+
+  <!-- Telegram Mini App SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="phone">
+
+    <!-- Fixed header bar: back + title + [A] -->
+    <header class="essay-header-bar">
+      <a href="index.html" class="back-btn">&#8592;</a>
+      <span class="bar-title">Trauma in the Frame (if long title if long title if...</span>
+      <a href="about.html" class="bar-about">[A]</a>
+    </header>
+
+    <!-- Essay content -->
+    <article class="essay-page">
+
+      <!-- Title -->
+      <h1 class="essay-title">Trauma in the Frame if long title if long title if long title</h1>
+
+      <!-- Author -->
+      <p class="essay-author">Julia Gaes</p>
+
+      <!-- Date + read time -->
+      <div class="essay-meta">
+        <span>28 Nov. 2024</span>
+        <span>9 min.</span>
+      </div>
+
+      <!-- Image -->
+      <img class="essay-image gallery-img" data-index="0" src="assets/images/essay-1-1.webp" alt="Essay 1" />
+
+      <!-- Caption -->
+      <p class="essay-caption">Felix Gonzalez-Torres "Untitled", 1991 Billboard Dimensions vary with installation Installed at Pennsylvania Avenue near Fulton Street, Brooklyn. One of six outdoor billboard locations throughout the New York City area, with 1 indoor location, as part of the exhibition Print/Out. The Museum of Modern Art (MoMA), New York, NY. 19 Feb. – 14 May 2012. Cur. Christopher Cherix. Catalogue. [With outdoor billboards on display 20 Feb. – 18 Mar. 2012.] Photographer: David Allison © Estate Felix Gonzalez-Torres Courtesy Felix Gonzalez-Torres Foundation</p>
+
+      <!-- Body -->
+      <div class="essay-body">
+        <p>Luca Guadagnino's recently released film Queer is a study of longing and alienation, steeped in trauma. Based on William S. Burroughs' once forgotten autobiographical novella of the same name, the film follows William Lee, an American expat living in 1950s Mexico City who becomes infatuated with a younger man named Allison.</p>
+
+        <p>The film is saturated with a sense of displacement — both physical and emotional. Lee exists on the margins of every space he inhabits, watching others from a careful distance, always slightly out of frame. Guadagnino renders this interiority visually, using long takes and sparse dialogue to communicate what cannot be said.</p>
+
+        <p>What interests me most is how the film handles the representation of trauma not as event, but as atmosphere. There is no single catastrophic moment — instead, trauma accumulates in glances, in silences, in the texture of light on skin. It is cinema that understands grief as something lived in rather than recovered from.</p>
+
+        <p>This is where Gonzalez-Torres becomes relevant. His billboard works — images of unmade beds, empty landscapes, birds in flight — operate similarly. They refuse the spectacle of suffering in favour of its quiet aftermath. The bed has been slept in, and now it is empty. Someone was here, and now they are not.</p>
+
+        <img class="essay-image gallery-img" data-index="1" src="assets/images/essay-1-2.webp" alt="Essay 1 image 2" />
+        <p class="essay-caption">Your caption here</p>
+
+        <p>The photo was taken in Kansas in the United States, on Burroughs' property. Burroughs is best known for his postmodern writings, such as the novel Queer and his shotgun art. <span class="fn" data-fn="6">[6]</span> Burroughs shot spray paint cans taped to a canvas with a shotgun to create abstract paintings. The photo is dated six months prior to Cobain's suicide.</p>
+
+        <p>Both artists understand that trauma's most honest representation is negative space — the shape of what is missing, not the thing itself.</p>
+      </div>
+
+    </article>
+
+  </div><!-- /phone -->
+
+  <!-- Footnote overlay + bottom sheet -->
+  <div class="fn-overlay" id="fnOverlay"></div>
+  <div class="fn-sheet" id="fnSheet">
+    <div class="fn-number" id="fnNumber"></div>
+    <div class="fn-text" id="fnText"></div>
+  </div>
+
+  <!-- Selection bar -->
+  <div class="selection-bar" id="selectionBar">
+    <button id="selComment">Comment</button>
+    <div class="sel-divider"></div>
+    <button id="selCopy">Copy</button>
+  </div>
+
+  <!-- Comment overlay + sheet -->
+  <div class="comment-overlay" id="commentOverlay"></div>
+  <div class="comment-sheet" id="commentSheet">
+    <div class="comment-sheet-header">
+      <span>Send comment on highlighted text</span>
+      <button id="commentClose">&#x2715;</button>
+    </div>
+    <p class="comment-quote" id="commentQuote"></p>
+    <div class="comment-field">
+      <label>Comment*</label>
+      <textarea id="commentText" placeholder="Your comment..."></textarea>
+    </div>
+    <div class="comment-field">
+      <label>Name*</label>
+      <input type="text" id="commentName" placeholder="John Smith" />
+    </div>
+    <div class="comment-consent">
+      <input type="checkbox" id="commentConsent" />
+      <span>I give consent for making the comment and your name public in our news letter.</span>
+    </div>
+    <button class="comment-submit" id="commentSubmit">Agree and send</button>
+  </div>
+
+  <!-- Gallery overlay -->
+  <div class="gallery-overlay" id="galleryOverlay">
+    <div class="gallery-track" id="galleryTrack"></div>
+    <div class="gallery-bar">
+      <div class="gallery-dots" id="galleryDots"></div>
+      <button class="gallery-close" id="galleryClose">&#x2715;</button>
+    </div>
+  </div>
+
+  <!-- Shared JS -->
+  <script src="js/main.js"></script>
+
+  <!-- Page-specific JS -->
+  <script>
+    if (window.Telegram?.WebApp) {
+      Telegram.WebApp.ready();
+      Telegram.WebApp.expand();
+    }
+
+    // ── Gallery
+    const galleryImages = [
+      { src: 'assets/images/essay-1-1.webp', caption: 'Felix Gonzalez-Torres "Untitled", 1991 Billboard Dimensions vary with installation.' },
+      { src: 'assets/images/essay-1-2.webp', caption: 'Collage made by William S. Burroughs for Kurt Cobain\'s 27th birthday.' },
+    ];
+
+    const galleryOverlay = document.getElementById('galleryOverlay');
+    const galleryTrack = document.getElementById('galleryTrack');
+    const galleryDots = document.getElementById('galleryDots');
+    const galleryClose = document.getElementById('galleryClose');
+    let currentIndex = 0;
+    let startX = 0;
+
+    // Build slides
+    galleryImages.forEach((img, i) => {
+      const slide = document.createElement('div');
+      slide.className = 'gallery-slide';
+      slide.innerHTML = `
+        <img src="${img.src}" alt="Image ${i + 1}" />
+        ${img.caption ? `<div class="gallery-caption">${img.caption}</div>` : ''}
+      `;
+      galleryTrack.appendChild(slide);
+
+      const dot = document.createElement('div');
+      dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+      galleryDots.appendChild(dot);
+    });
+
+    function goTo(index) {
+      currentIndex = index;
+      galleryTrack.style.transform = `translateX(-${index * 100}%)`;
+      document.querySelectorAll('.gallery-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === index);
+      });
+    }
+
+    function openGallery(index) {
+      goTo(index);
+      galleryOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeGallery() {
+      galleryOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Tap image to open gallery
+    document.querySelectorAll('.gallery-img').forEach(img => {
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', () => openGallery(parseInt(img.dataset.index)));
+    });
+
+    // Close button
+    galleryClose.addEventListener('click', closeGallery);
+
+    // Swipe to navigate
+    galleryTrack.addEventListener('touchstart', e => {
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+
+    galleryTrack.addEventListener('touchend', e => {
+      const delta = startX - e.changedTouches[0].clientX;
+      if (delta > 50 && currentIndex < galleryImages.length - 1) goTo(currentIndex + 1);
+      if (delta < -50 && currentIndex > 0) goTo(currentIndex - 1);
+    }, { passive: true });
+    const footnotes = {
+      6: 'Burroughs shot spray paint cans taped to a canvas with a shotgun to create abstract paintings.'
+    };
+
+    const overlay = document.getElementById('fnOverlay');
+    const sheet = document.getElementById('fnSheet');
+    const fnNumber = document.getElementById('fnNumber');
+    const fnText = document.getElementById('fnText');
+
+    // Open footnote sheet
+    document.querySelectorAll('.fn').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const num = el.dataset.fn;
+        fnNumber.textContent = '[' + num + ']';
+        fnText.textContent = footnotes[num];
+        overlay.classList.add('active');
+        sheet.classList.add('active');
+      });
+    });
+
+    // Close on overlay tap
+    overlay.addEventListener('click', () => {
+      overlay.classList.remove('active');
+      sheet.classList.remove('active');
+    });
+
+    // ── Text selection bar
+    const selectionBar = document.getElementById('selectionBar');
+    const selComment = document.getElementById('selComment');
+    const selCopy = document.getElementById('selCopy');
+    const commentOverlay = document.getElementById('commentOverlay');
+    const commentSheet = document.getElementById('commentSheet');
+    const commentClose = document.getElementById('commentClose');
+    const commentQuote = document.getElementById('commentQuote');
+    const commentSubmit = document.getElementById('commentSubmit');
+    let selectedText = '';
+
+    function hideSelectionBar() {
+      selectionBar.classList.remove('active');
+    }
+
+    function showCommentSheet() {
+      commentQuote.textContent = '"' + selectedText + '"';
+      commentOverlay.classList.add('active');
+      commentSheet.classList.add('active');
+      hideSelectionBar();
+      window.getSelection().removeAllRanges();
+    }
+
+    function hideCommentSheet() {
+      commentOverlay.classList.remove('active');
+      commentSheet.classList.remove('active');
+    }
+
+    // Detect text selection — touch for phone, mouse for Chrome dev testing
+    document.querySelector('.essay-body').addEventListener('touchend', () => {
+      setTimeout(handleSelection, 100);
+    });
+    document.querySelector('.essay-body').addEventListener('mouseup', handleSelection);
+
+    function handleSelection() {
+      const selection = window.getSelection();
+      const text = selection.toString().trim();
+      if (text.length < 2) { hideSelectionBar(); return; }
+
+      selectedText = text;
+      const range = selection.getRangeAt(0);
+      const rect = range.getBoundingClientRect();
+
+      selectionBar.style.top = (rect.top + window.scrollY - 44) + 'px';
+      selectionBar.style.left = (rect.left + rect.width / 2) + 'px';
+      selectionBar.classList.add('active');
+    }
+
+    // Hide bar on tap/click elsewhere
+    document.addEventListener('touchstart', (e) => {
+      if (!selectionBar.contains(e.target)) hideSelectionBar();
+    }, { passive: true });
+    document.addEventListener('mousedown', (e) => {
+      if (!selectionBar.contains(e.target)) hideSelectionBar();
+    });
+
+    // Comment button
+    selComment.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showCommentSheet();
+    });
+
+    // Copy button
+    selCopy.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navigator.clipboard.writeText(selectedText).catch(() => {
+        const el = document.createElement('textarea');
+        el.value = selectedText;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+      });
+      window.getSelection().removeAllRanges();
+      hideSelectionBar();
+    });
+
+    // Close comment sheet
+    commentClose.addEventListener('click', hideCommentSheet);
+    commentOverlay.addEventListener('click', hideCommentSheet);
+
+    // Hide selection bar on tap elsewhere
+    document.addEventListener('touchstart', (e) => {
+      if (!selectionBar.contains(e.target)) hideSelectionBar();
+    });
+
+    // Submit (no bot yet — just logs to console)
+    commentSubmit.addEventListener('click', () => {
+      const name = document.getElementById('commentName').value.trim();
+      const comment = document.getElementById('commentText').value.trim();
+      const consent = document.getElementById('commentConsent').checked;
+      if (!name || !comment || !consent) {
+        alert('Please fill in all fields and give consent.');
+        return;
+      }
+      console.log('Comment submitted:', { quote: selectedText, name, comment });
+      hideCommentSheet();
+      document.getElementById('commentName').value = '';
+      document.getElementById('commentText').value = '';
+      document.getElementById('commentConsent').checked = false;
+    });
+
+  </script>
+
+</body>
+</html>
