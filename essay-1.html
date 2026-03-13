@@ -97,7 +97,7 @@
     </div>
     <div class="comment-consent">
       <input type="checkbox" id="commentConsent" />
-      <span>I give consent for making the comment and your name public in our newsletter.</span>
+      <span>I give consent for making the comment and your name public in our news letter.</span>
     </div>
     <button class="comment-submit" id="commentSubmit">Agree and send</button>
   </div>
@@ -321,6 +321,17 @@
       document.getElementById('commentName').value = '';
       document.getElementById('commentText').value = '';
       document.getElementById('commentConsent').checked = false;
+    });
+
+    // Block native copy/paste on essay body
+    const essayBody = document.querySelector('.essay-body');
+    essayBody.addEventListener('copy', (e) => e.preventDefault());
+    essayBody.addEventListener('contextmenu', (e) => e.preventDefault());
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && ['c', 'x'].includes(e.key.toLowerCase())) {
+        const sel = window.getSelection();
+        if (sel && essayBody.contains(sel.anchorNode)) e.preventDefault();
+      }
     });
 
   </script>
