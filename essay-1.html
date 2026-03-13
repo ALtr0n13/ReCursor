@@ -61,6 +61,24 @@
         <p>Both artists understand that trauma's most honest representation is negative space — the shape of what is missing, not the thing itself.</p>
       </div>
 
+      <!-- Static comment form at bottom -->
+      <div class="bottom-comment">
+        <h2 class="bottom-comment-title">Send comment</h2>
+        <div class="comment-field">
+          <label>Comment*</label>
+          <textarea id="bottomCommentText" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."></textarea>
+        </div>
+        <div class="comment-field">
+          <label>Name*</label>
+          <input type="text" id="bottomCommentName" placeholder="John Smith" />
+        </div>
+        <div class="comment-consent">
+          <input type="checkbox" id="bottomCommentConsent" />
+          <span>I give consent for making the comment and your name public in our news letter.</span>
+        </div>
+        <button class="comment-submit" id="bottomCommentSubmit">Agree and send us on Telegram</button>
+      </div>
+
     </article>
 
   </div><!-- /phone -->
@@ -81,7 +99,7 @@
 
   <!-- Comment overlay + sheet -->
   <div class="comment-overlay" id="commentOverlay"></div>
-  <div class="comment-sheet" id="commentSheet">
+  <div class="comment-sheet comment-sheet--dark" id="commentSheet">
     <div class="comment-sheet-header">
       <span>Send comment on highlighted text</span>
       <button id="commentClose">&#x2715;</button>
@@ -296,7 +314,6 @@
         const rect = range.getBoundingClientRect();
         const scrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
 
-        // rect.top is relative to viewport, add scroll to get page position
         const top = rect.top + scrollY - 44;
         const left = rect.left + rect.width / 2;
 
@@ -363,20 +380,20 @@
       document.getElementById('commentConsent').checked = false;
     });
 
-    // Block native copy callout on mobile
+    // Bottom comment form
+    document.getElementById('bottomCommentSubmit').addEventListener('click', () => {
+      const name = document.getElementById('bottomCommentName').value.trim();
+      const comment = document.getElementById('bottomCommentText').value.trim();
+      const consent = document.getElementById('bottomCommentConsent').checked;
+      if (!name || !comment || !consent) {
+        alert('Please fill in all fields and give consent.');
+        return;
+      }
+      console.log('Bottom comment submitted:', { name, comment });
+    });
     const essayBody = document.querySelector('.essay-body');
     essayBody.addEventListener('contextmenu', e => e.preventDefault());
     essayBody.addEventListener('copy', e => e.preventDefault());
-
-    // Block iOS long press callout in Telegram WKWebView
-    let longPressTimer;
-    essayBody.addEventListener('touchstart', e => {
-      longPressTimer = setTimeout(() => {
-        window.getSelection().removeAllRanges();
-      }, 300);
-    }, { passive: true });
-    essayBody.addEventListener('touchend', () => clearTimeout(longPressTimer));
-    essayBody.addEventListener('touchmove', () => clearTimeout(longPressTimer));
 
   </script>
 
