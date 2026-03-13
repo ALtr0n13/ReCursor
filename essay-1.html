@@ -119,6 +119,16 @@
     if (window.Telegram?.WebApp) {
       Telegram.WebApp.ready();
       Telegram.WebApp.expand();
+      // Show Telegram's native back button and handle it
+      Telegram.WebApp.BackButton.show();
+      Telegram.WebApp.BackButton.onClick(() => {
+        window.location.href = 'index.html';
+      });
+      // Disable swipe-back gesture
+      Telegram.WebApp.disableClosingConfirmation?.();
+      if (Telegram.WebApp.setSwipeBackEnabled) {
+        Telegram.WebApp.setSwipeBackEnabled(false);
+      }
     }
 
     // ── Gallery
@@ -352,6 +362,21 @@
       document.getElementById('commentText').value = '';
       document.getElementById('commentConsent').checked = false;
     });
+
+    // Block native copy callout on mobile
+    const essayBody = document.querySelector('.essay-body');
+    essayBody.addEventListener('contextmenu', e => e.preventDefault());
+    essayBody.addEventListener('copy', e => e.preventDefault());
+
+    // Block iOS long press callout in Telegram WKWebView
+    let longPressTimer;
+    essayBody.addEventListener('touchstart', e => {
+      longPressTimer = setTimeout(() => {
+        window.getSelection().removeAllRanges();
+      }, 300);
+    }, { passive: true });
+    essayBody.addEventListener('touchend', () => clearTimeout(longPressTimer));
+    essayBody.addEventListener('touchmove', () => clearTimeout(longPressTimer));
 
   </script>
 
