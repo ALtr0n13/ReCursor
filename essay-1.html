@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Trauma in the Frame — ReCursor</title>
 
   <!-- Telegram Mini App SDK -->
@@ -132,7 +132,6 @@
     const galleryDots = document.getElementById('galleryDots');
     const galleryClose = document.getElementById('galleryClose');
     let currentIndex = 0;
-    let startX = 0;
 
     // Build slides
     galleryImages.forEach((img, i) => {
@@ -177,15 +176,46 @@
     // Close button
     galleryClose.addEventListener('click', closeGallery);
 
-    // Swipe to navigate
+    // Swipe back to index.html (swipe right from left edge)
+    let swipeBackStartX = 0;
+    let swipeBackStartY = 0;
+    document.addEventListener('touchstart', (e) => {
+      swipeBackStartX = e.touches[0].clientX;
+      swipeBackStartY = e.touches[0].clientY;
+    }, { passive: true });
+    document.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - swipeBackStartX;
+      const dy = Math.abs(e.changedTouches[0].clientY - swipeBackStartY);
+      if (dx > 80 && dy < 60 && swipeBackStartX < 40) {
+        window.location.href = 'index.html';
+      }
+    }, { passive: true });
+
+    // Gallery swipe — smooth drag
+    let startX = 0;
+    let isDragging = false;
+    let dragOffset = 0;
+
     galleryTrack.addEventListener('touchstart', e => {
       startX = e.touches[0].clientX;
+      isDragging = true;
+      galleryTrack.style.transition = 'none';
+    }, { passive: true });
+
+    galleryTrack.addEventListener('touchmove', e => {
+      if (!isDragging) return;
+      dragOffset = e.touches[0].clientX - startX;
+      const base = -currentIndex * 100;
+      galleryTrack.style.transform = `translateX(calc(${base}% + ${dragOffset}px))`;
     }, { passive: true });
 
     galleryTrack.addEventListener('touchend', e => {
-      const delta = startX - e.changedTouches[0].clientX;
-      if (delta > 50 && currentIndex < galleryImages.length - 1) goTo(currentIndex + 1);
-      if (delta < -50 && currentIndex > 0) goTo(currentIndex - 1);
+      isDragging = false;
+      galleryTrack.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+      if (dragOffset < -50 && currentIndex < galleryImages.length - 1) goTo(currentIndex + 1);
+      else if (dragOffset > 50 && currentIndex > 0) goTo(currentIndex - 1);
+      else goTo(currentIndex);
+      dragOffset = 0;
     }, { passive: true });
     const footnotes = {
       6: 'Burroughs shot spray paint cans taped to a canvas with a shotgun to create abstract paintings.'
@@ -321,17 +351,6 @@
       document.getElementById('commentName').value = '';
       document.getElementById('commentText').value = '';
       document.getElementById('commentConsent').checked = false;
-    });
-
-    // Block native copy/paste on essay body
-    const essayBody = document.querySelector('.essay-body');
-    essayBody.addEventListener('copy', (e) => e.preventDefault());
-    essayBody.addEventListener('contextmenu', (e) => e.preventDefault());
-    document.addEventListener('keydown', (e) => {
-      if ((e.ctrlKey || e.metaKey) && ['c', 'x'].includes(e.key.toLowerCase())) {
-        const sel = window.getSelection();
-        if (sel && essayBody.contains(sel.anchorNode)) e.preventDefault();
-      }
     });
 
   </script>
