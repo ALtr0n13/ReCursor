@@ -242,33 +242,43 @@
       commentSheet.classList.remove('active');
     }
 
-    // Detect text selection — touch for phone, mouse for Chrome dev testing
-    document.querySelector('.essay-body').addEventListener('touchend', () => {
-      setTimeout(handleSelection, 100);
-    });
-    document.querySelector('.essay-body').addEventListener('mouseup', handleSelection);
-
-    function handleSelection() {
+    // Detect text selection using selectionchange
+    document.addEventListener('selectionchange', () => {
       const selection = window.getSelection();
       const text = selection.toString().trim();
+
       if (text.length < 2) { hideSelectionBar(); return; }
 
       selectedText = text;
-      const range = selection.getRangeAt(0);
-      const rect = range.getBoundingClientRect();
 
-      selectionBar.style.top = (rect.top + window.scrollY - 44) + 'px';
-      selectionBar.style.left = (rect.left + rect.width / 2) + 'px';
-      selectionBar.classList.add('active');
-    }
+      try {
+        const range = selection.getRangeAt(0);
+        const rect = range.getBoundingClientRect();
+        const scrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
 
-    // Hide bar on tap/click elsewhere
+        // rect.top is relative to viewport, add scroll to get page position
+        const top = rect.top + scrollY - 44;
+        const left = rect.left + rect.width / 2;
+
+        selectionBar.style.position = 'absolute';
+        selectionBar.style.top = top + 'px';
+        selectionBar.style.left = left + 'px';
+        selectionBar.classList.add('active');
+      } catch(e) {
+        hideSelectionBar();
+      }
+    });
+
+    // Hide bar when clicking outside both the bar and the essay body
+    document.addEventListener('mousedown', (e) => {
+      if (!selectionBar.contains(e.target) && !document.querySelector('.essay-body').contains(e.target)) {
+        hideSelectionBar();
+      }
+    });
+
     document.addEventListener('touchstart', (e) => {
       if (!selectionBar.contains(e.target)) hideSelectionBar();
     }, { passive: true });
-    document.addEventListener('mousedown', (e) => {
-      if (!selectionBar.contains(e.target)) hideSelectionBar();
-    });
 
     // Comment button
     selComment.addEventListener('click', (e) => {
@@ -295,10 +305,7 @@
     commentClose.addEventListener('click', hideCommentSheet);
     commentOverlay.addEventListener('click', hideCommentSheet);
 
-    // Hide selection bar on tap elsewhere
-    document.addEventListener('touchstart', (e) => {
-      if (!selectionBar.contains(e.target)) hideSelectionBar();
-    });
+
 
     // Submit (no bot yet — just logs to console)
     commentSubmit.addEventListener('click', () => {
