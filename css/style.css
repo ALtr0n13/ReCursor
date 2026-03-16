@@ -1,10 +1,7 @@
-/* =============================================
-   RECURSOR — style.css
-   ============================================= */
 
    @import url('https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap');
 
-   /* --- Variables --- */
+
    :root {
      --bg: #F4EAE6;
      --white: #FFFFFF;
@@ -13,7 +10,7 @@
      --font: 'Futura', 'Jost', sans-serif;
    }
    
-   /* --- Reset --- */
+
    *, *::before, *::after {
      box-sizing: border-box;
      margin: 0;
@@ -21,7 +18,7 @@
      font-family: var(--font);
    }
    
-   /* --- Base --- */
+
    html, body {
      background: var(--bg);
      font-family: var(--font);
@@ -42,7 +39,7 @@
      height: auto;
    }
    
-   /* --- Phone Container --- */
+
    .phone {
      max-width: 390px;
      min-height: 100vh;
@@ -51,9 +48,7 @@
      overflow-x: hidden;
    }
    
-   /* =============================================
-      TYPOGRAPHY
-      ============================================= */
+   /* typography */
    
    h1, .h1 {
      font-weight: 700;
@@ -81,9 +76,7 @@
      color: var(--blue);
    }
    
-   /* =============================================
-      STICKY HEADER (index page)
-      ============================================= */
+  
    
    .sticky-header {
      position: fixed;
@@ -125,9 +118,7 @@
      justify-content: center;
    }
    
-   /* =============================================
-      INTRO SECTION
-      ============================================= */
+ 
    
    .intro {
      padding: 40px 24px 24px;
@@ -136,9 +127,7 @@
      gap: 16px;
    }
    
-   /* =============================================
-      ESSAY LIST
-      ============================================= */
+   /* essay list */
    
    .essay-list {
      display: flex;
@@ -183,9 +172,7 @@
      width: 100%;
    }
    
-   /* =============================================
-      ESSAY / ABOUT HEADER BAR
-      ============================================= */
+   /* header */
    
    .essay-header-bar {
      position: fixed;
@@ -230,9 +217,7 @@
      text-align: center;
    }
    
-   /* =============================================
-      ESSAY PAGE
-      ============================================= */
+   /* essay page */
    
    .essay-page {
      padding: 64px 24px 0;
@@ -306,9 +291,6 @@
      margin-top: 8px;
    }
    
-   /* =============================================
-      TEXT SELECTION BAR
-      ============================================= */
    
    .selection-bar {
      display: none;
@@ -350,9 +332,7 @@
      flex-shrink: 0;
    }
    
-   /* =============================================
-      COMMENT BOTTOM SHEET
-      ============================================= */
+   /* comment form #1 */
    
    .comment-overlay {
      display: none;
@@ -484,9 +464,7 @@
      cursor: pointer;
    }
    
-   /* =============================================
-      IMAGE GALLERY
-      ============================================= */
+   /* image gallery */
    
    .gallery-overlay {
      display: none;
@@ -580,9 +558,7 @@
      line-height: 1;
    }
    
-   /* =============================================
-      FOOTNOTES
-      ============================================= */
+   /* footnotes */
    
    .fn {
      font-size: 10px;
@@ -632,9 +608,7 @@
      color: var(--white);
    }
    
-   /* =============================================
-      ABOUT PAGE
-      ============================================= */
+   /* about page */
    
    .about-page {
      padding: 64px 0 60px;
@@ -694,9 +668,7 @@
      line-height: 40px;
    }
    
-   /* =============================================
-      BOTTOM COMMENT FORM
-      ============================================= */
+   /* comment form #2 */
    
    .bottom-comment {
      margin-top: 48px;
@@ -713,7 +685,7 @@
      margin-bottom: 24px;
    }
    
-   /* Selection comment sheet — dark navy style */
+
    .comment-sheet--dark {
      background: #0A0A64;
    }

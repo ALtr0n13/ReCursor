@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Trauma in the Frame — ReCursor</title>
 
-  <!-- Telegram Mini App SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet" />
@@ -15,35 +14,27 @@
 
   <div class="phone">
 
-    <!-- Fixed header bar: back + title + [A] -->
     <header class="essay-header-bar">
       <a href="index.html" class="back-btn">&#8592;</a>
-      <span class="bar-title">Trauma in the Frame (if long title if long title if...</span>
+      <span class="bar-title">Trauma in the Frame if long title if long title if...</span>
       <a href="about.html" class="bar-about">[A]</a>
     </header>
 
-    <!-- Essay content -->
     <article class="essay-page">
 
-      <!-- Title -->
       <h1 class="essay-title">Trauma in the Frame if long title if long title if long title</h1>
 
-      <!-- Author -->
       <p class="essay-author">Julia Gaes</p>
 
-      <!-- Date + read time -->
       <div class="essay-meta">
         <span>28 Nov. 2024</span>
         <span>9 min.</span>
       </div>
 
-      <!-- Image -->
       <img class="essay-image gallery-img" data-index="0" src="assets/images/essay-1-1.webp" alt="Essay 1" />
 
-      <!-- Caption -->
       <p class="essay-caption">Felix Gonzalez-Torres "Untitled", 1991 Billboard Dimensions vary with installation Installed at Pennsylvania Avenue near Fulton Street, Brooklyn. One of six outdoor billboard locations throughout the New York City area, with 1 indoor location, as part of the exhibition Print/Out. The Museum of Modern Art (MoMA), New York, NY. 19 Feb. – 14 May 2012. Cur. Christopher Cherix. Catalogue. [With outdoor billboards on display 20 Feb. – 18 Mar. 2012.] Photographer: David Allison © Estate Felix Gonzalez-Torres Courtesy Felix Gonzalez-Torres Foundation</p>
 
-      <!-- Body -->
       <div class="essay-body">
         <p>Luca Guadagnino's recently released film Queer is a study of longing and alienation, steeped in trauma. Based on William S. Burroughs' once forgotten autobiographical novella of the same name, the film follows William Lee, an American expat living in 1950s Mexico City who becomes infatuated with a younger man named Allison.</p>
 
@@ -61,7 +52,6 @@
         <p>Both artists understand that trauma's most honest representation is negative space — the shape of what is missing, not the thing itself.</p>
       </div>
 
-      <!-- Static comment form at bottom -->
       <div class="bottom-comment">
         <h2 class="bottom-comment-title">Send comment</h2>
         <div class="comment-field">
@@ -81,23 +71,20 @@
 
     </article>
 
-  </div><!-- /phone -->
+  </div>
 
-  <!-- Footnote overlay + bottom sheet -->
   <div class="fn-overlay" id="fnOverlay"></div>
   <div class="fn-sheet" id="fnSheet">
     <div class="fn-number" id="fnNumber"></div>
     <div class="fn-text" id="fnText"></div>
   </div>
 
-  <!-- Selection bar -->
   <div class="selection-bar" id="selectionBar">
     <button id="selComment">Comment</button>
     <div class="sel-divider"></div>
     <button id="selCopy">Copy</button>
   </div>
 
-  <!-- Comment overlay + sheet -->
   <div class="comment-overlay" id="commentOverlay"></div>
   <div class="comment-sheet comment-sheet--dark" id="commentSheet">
     <div class="comment-sheet-header">
@@ -120,7 +107,6 @@
     <button class="comment-submit" id="commentSubmit">Agree and send</button>
   </div>
 
-  <!-- Gallery overlay -->
   <div class="gallery-overlay" id="galleryOverlay">
     <div class="gallery-track" id="galleryTrack"></div>
     <div class="gallery-bar">
@@ -129,27 +115,22 @@
     </div>
   </div>
 
-  <!-- Shared JS -->
   <script src="js/main.js"></script>
 
-  <!-- Page-specific JS -->
   <script>
     if (window.Telegram?.WebApp) {
       Telegram.WebApp.ready();
       Telegram.WebApp.expand();
-      // Show Telegram's native back button and handle it
       Telegram.WebApp.BackButton.show();
       Telegram.WebApp.BackButton.onClick(() => {
         window.location.href = 'index.html';
       });
-      // Disable swipe-back gesture
-      Telegram.WebApp.disableClosingConfirmation?.();
       if (Telegram.WebApp.setSwipeBackEnabled) {
         Telegram.WebApp.setSwipeBackEnabled(false);
       }
     }
 
-    // ── Gallery
+    // gallery
     const galleryImages = [
       { src: 'assets/images/essay-1-1.webp', caption: 'Felix Gonzalez-Torres "Untitled", 1991 Billboard Dimensions vary with installation.' },
       { src: 'assets/images/essay-1-2.webp', caption: 'Collage made by William S. Burroughs for Kurt Cobain\'s 27th birthday.' },
@@ -161,7 +142,6 @@
     const galleryClose = document.getElementById('galleryClose');
     let currentIndex = 0;
 
-    // Build slides
     galleryImages.forEach((img, i) => {
       const slide = document.createElement('div');
       slide.className = 'gallery-slide';
@@ -195,16 +175,14 @@
       document.body.style.overflow = '';
     }
 
-    // Tap image to open gallery
     document.querySelectorAll('.gallery-img').forEach(img => {
       img.style.cursor = 'pointer';
       img.addEventListener('click', () => openGallery(parseInt(img.dataset.index)));
     });
 
-    // Close button
     galleryClose.addEventListener('click', closeGallery);
 
-    // Swipe back to index.html (swipe right from left edge)
+    // swipe back
     let swipeBackStartX = 0;
     let swipeBackStartY = 0;
     document.addEventListener('touchstart', (e) => {
@@ -219,7 +197,7 @@
       }
     }, { passive: true });
 
-    // Gallery swipe — smooth drag
+    // gallery drag
     let startX = 0;
     let isDragging = false;
     let dragOffset = 0;
@@ -245,6 +223,8 @@
       else goTo(currentIndex);
       dragOffset = 0;
     }, { passive: true });
+
+    // footnotes
     const footnotes = {
       6: 'Burroughs shot spray paint cans taped to a canvas with a shotgun to create abstract paintings.'
     };
@@ -254,7 +234,6 @@
     const fnNumber = document.getElementById('fnNumber');
     const fnText = document.getElementById('fnText');
 
-    // Open footnote sheet
     document.querySelectorAll('.fn').forEach(el => {
       el.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -266,13 +245,12 @@
       });
     });
 
-    // Close on overlay tap
     overlay.addEventListener('click', () => {
       overlay.classList.remove('active');
       sheet.classList.remove('active');
     });
 
-    // ── Text selection bar
+    // text selection bar
     const selectionBar = document.getElementById('selectionBar');
     const selComment = document.getElementById('selComment');
     const selCopy = document.getElementById('selCopy');
@@ -300,7 +278,6 @@
       commentSheet.classList.remove('active');
     }
 
-    // Detect text selection using selectionchange
     document.addEventListener('selectionchange', () => {
       const selection = window.getSelection();
       const text = selection.toString().trim();
@@ -314,19 +291,15 @@
         const rect = range.getBoundingClientRect();
         const scrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
 
-        const top = rect.top + scrollY - 44;
-        const left = rect.left + rect.width / 2;
-
         selectionBar.style.position = 'absolute';
-        selectionBar.style.top = top + 'px';
-        selectionBar.style.left = left + 'px';
+        selectionBar.style.top = (rect.top + scrollY - 44) + 'px';
+        selectionBar.style.left = (rect.left + rect.width / 2) + 'px';
         selectionBar.classList.add('active');
       } catch(e) {
         hideSelectionBar();
       }
     });
 
-    // Hide bar when clicking outside both the bar and the essay body
     document.addEventListener('mousedown', (e) => {
       if (!selectionBar.contains(e.target) && !document.querySelector('.essay-body').contains(e.target)) {
         hideSelectionBar();
@@ -337,13 +310,11 @@
       if (!selectionBar.contains(e.target)) hideSelectionBar();
     }, { passive: true });
 
-    // Comment button
     selComment.addEventListener('click', (e) => {
       e.stopPropagation();
       showCommentSheet();
     });
 
-    // Copy button
     selCopy.addEventListener('click', (e) => {
       e.stopPropagation();
       navigator.clipboard.writeText(selectedText).catch(() => {
@@ -358,39 +329,27 @@
       hideSelectionBar();
     });
 
-    // Close comment sheet
     commentClose.addEventListener('click', hideCommentSheet);
     commentOverlay.addEventListener('click', hideCommentSheet);
 
-
-
-    // Submit (no bot yet — just logs to console)
     commentSubmit.addEventListener('click', () => {
       const name = document.getElementById('commentName').value.trim();
       const comment = document.getElementById('commentText').value.trim();
       const consent = document.getElementById('commentConsent').checked;
-      if (!name || !comment || !consent) {
-        alert('Please fill in all fields and give consent.');
-        return;
-      }
-      console.log('Comment submitted:', { quote: selectedText, name, comment });
+      if (!name || !comment || !consent) return;
       hideCommentSheet();
       document.getElementById('commentName').value = '';
       document.getElementById('commentText').value = '';
       document.getElementById('commentConsent').checked = false;
     });
 
-    // Bottom comment form
     document.getElementById('bottomCommentSubmit').addEventListener('click', () => {
       const name = document.getElementById('bottomCommentName').value.trim();
       const comment = document.getElementById('bottomCommentText').value.trim();
       const consent = document.getElementById('bottomCommentConsent').checked;
-      if (!name || !comment || !consent) {
-        alert('Please fill in all fields and give consent.');
-        return;
-      }
-      console.log('Bottom comment submitted:', { name, comment });
+      if (!name || !comment || !consent) return;
     });
+
     const essayBody = document.querySelector('.essay-body');
     essayBody.addEventListener('contextmenu', e => e.preventDefault());
     essayBody.addEventListener('copy', e => e.preventDefault());

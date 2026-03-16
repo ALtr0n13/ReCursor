@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>ReCursor</title>
 
-  <!-- Telegram Mini App SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet" />
@@ -15,19 +14,16 @@
 
   <div class="phone">
 
-    <!-- Sticky header (appears on scroll) -->
     <header class="sticky-header" id="stickyHeader">
       <span class="sticky-logo">ReCursor</span>
       <a href="about.html" class="sticky-about">[A]</a>
     </header>
 
-    <!-- Intro -->
     <div class="intro">
       <h1>ReCursor</h1>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
     </div>
 
-    <!-- Essay list -->
     <div class="essay-list">
 
       <a href="essay-1.html" class="essay-card">
@@ -42,7 +38,7 @@
 
       <a href="essay-1.html" class="essay-card">
         <img loading="lazy" class="thumb" src="assets/images/essay-1-1.webp" alt="Essay 2" />
-        <h4>Essay Title Recounting my artistic interest in burlesque and drag</h4>
+        <h4>Essay Title Two Goes Here and Can Wrap to Two Lines</h4>
         <span class="author">Julia Gaes</span>
         <div class="meta">
           <span>14 Oct. 2024</span>
@@ -52,7 +48,7 @@
 
       <a href="essay-1.html" class="essay-card">
         <img loading="lazy" class="thumb" src="assets/images/essay-1-1.webp" alt="Essay 3" />
-        <h4>Essay Title Three</h4>
+        <h4>Essay Title Three — Another Compelling Headline</h4>
         <span class="author">Julia Gaes</span>
         <div class="meta">
           <span>02 Sep. 2024</span>
@@ -62,7 +58,7 @@
 
       <a href="essay-1.html" class="essay-card">
         <img loading="lazy" class="thumb" src="assets/images/essay-1-1.webp" alt="Essay 4" />
-        <h4>Essay Title Four Recounting my artistic interest in burlesque and drag</h4>
+        <h4>Essay Title Four — Short and Sharp</h4>
         <span class="author">Julia Gaes</span>
         <div class="meta">
           <span>18 Aug. 2024</span>
@@ -72,7 +68,7 @@
 
       <a href="essay-1.html" class="essay-card">
         <img loading="lazy" class="thumb" src="assets/images/essay-1-1.webp" alt="Essay 5" />
-        <h4>Essay Title Five</h4>
+        <h4>Essay Title Five — The Final One in This List</h4>
         <span class="author">Julia Gaes</span>
         <div class="meta">
           <span>01 Jul. 2024</span>
@@ -80,22 +76,16 @@
         </div>
       </a>
 
-    </div><!-- /essay-list -->
 
-  </div><!-- /phone -->
 
-  <!-- Shared JS -->
   <script src="js/main.js"></script>
 
-  <!-- Page-specific JS -->
   <script>
-    // Telegram: expand to fullscreen on load
     if (window.Telegram?.WebApp) {
       Telegram.WebApp.ready();
       Telegram.WebApp.expand();
     }
 
-    // Sticky header — show after scrolling past intro
     const stickyHeader = document.getElementById('stickyHeader');
     const intro = document.querySelector('.intro');
 
